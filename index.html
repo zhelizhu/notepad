@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="./js/vue.min.js"></script>
+	<title>notepad</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		li {
+			list-style: none;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background: #ebebeb;
+		}
+
+		.notepad {
+			width: 400px;
+			min-height: 500px;
+			background: #494b50;
+			border-radius: 15px;
+			padding: 35px;
+		}
+
+		.notepad .main{
+			position: relative;
+			background: #e6e2c9;
+			min-height: 450px;
+		}
+
+		.notepad .main::after{
+			content: "";
+			display: block;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 0;
+			height: 0;
+			border: 50px solid #e5e2ca;
+			border-right: 50px solid #cac5b1;
+			border-bottom: 50px solid #cac5b1;
+		}
+
+		.notepad .input {
+			position: relative;
+			padding: 10px 15px;
+		}
+
+		.notepad .input .add{
+			height: 30px;
+			width: 50px;
+			line-height: 30px;
+			text-align: center;
+			border-radius: 0 30px 30px 0;
+			position: absolute;
+			right: 15px;
+			top: 10px;
+			cursor: pointer;
+			background:#F5F0E3;
+			color: #851D41;
+		}
+
+		.notepad input {
+			height: 30px;
+			width: 100%;
+			text-indent: 2em;
+			border: none;
+			outline: none;
+			border-radius: 30px;
+		}
+
+		.notepad .content {
+			padding: 0 15px;
+		}
+
+		.notepad .content li{
+			position: relative;
+			text-indent: 1em;
+			border-bottom: 2px solid black;
+			margin-bottom: 15px;
+		}
+
+		.notepad .content li .close{
+			display: block;
+			position: absolute;
+			right: 15px;
+			top: 0px;
+			display: none;
+			cursor: pointer;
+		}
+
+		.notepad .content li:hover .close{
+			color: red;
+			display: block;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="notepad">
+
+		<div class="main">
+
+			<div class="input">
+				<input type="text" v-model="input" required="required">
+				<div class="add" @click="add">添加</div>
+			</div>
+
+			<ul class="content" v-for="(item,index) in text">
+				<li>{{text[index]}} <span class="close">×</span> </li>
+			</ul>
+
+		</div>
+
+	</div>
+	<script>
+		var app=new Vue({
+			el:'.notepad',
+			data:{
+				text:['text'],
+				input:''
+			},
+			methods:{
+				add:function(){
+					
+					this.text.push(this.input)
+		
+				}
+			}
+		})
+	</script>
+
+</body>
+
+</html>
